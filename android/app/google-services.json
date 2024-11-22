@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "961428634796",
+    "project_id": "chat-with-nms-6c5af",
+    "storage_bucket": "chat-with-nms-6c5af.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:961428634796:android:83bd3fcf464dc58b8f7309",
+        "android_client_info": {
+          "package_name": "com.example.chat_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOfDH4BzEKe3B2VgCjar8GjQXGw6VU4gc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
