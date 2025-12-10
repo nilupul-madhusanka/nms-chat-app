@@ -41,14 +41,22 @@ class HomeScreen extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           }
 
+          if (userSnapshot.hasError) {
+            debugPrint('Error loading users: ${userSnapshot.error}');
+            return const Center(child: Text("Error loading users."));
+          }
+
           if (!userSnapshot.hasData || userSnapshot.data!.docs.isEmpty) {
             return const Center(child: Text("No one registered."));
           }
 
           final userDocs = userSnapshot.data!.docs;
-          final otherUsers = userDocs
-              .where((doc) => doc['userId'] != currentUser.uid)
-              .toList();
+          final otherUsers = userDocs.where((doc) {
+            final data = doc.data() as Map<String, dynamic>?;
+            if (data == null) return false;
+            final docUserId = data['userId'] as String?;
+            return docUserId != null && docUserId != currentUser.uid;
+          }).toList();
 
           if (otherUsers.isEmpty) {
             return const Center(
@@ -59,12 +67,16 @@ class HomeScreen extends StatelessWidget {
             itemCount: otherUsers.length,
             itemBuilder: (ctx, index) {
               final otherUser = otherUsers[index];
+              final userData = otherUser.data() as Map<String, dynamic>;
+              final odocUsername = userData['username'] as String? ?? 'Unknown User';
+              final odocUserId = userData['userId'] as String? ?? otherUser.id;
+              
               return ListTile(
                 tileColor: const Color(0xFF30336B),
                 title: Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: Text(
-                    otherUser['username'],
+                    odocUsername,
                     style: const TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ),
@@ -79,14 +91,14 @@ class HomeScreen extends StatelessWidget {
                 ),
                 onTap: () {
                   String chatRoomId =
-                      getChatRoomId(currentUser.uid, otherUser['userId']);
+                      getChatRoomId(currentUser.uid, odocUserId);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => ChatScreen(
                         chatRoomId: chatRoomId,
-                        recipientId: otherUser['userId'],
-                        recipientName: otherUser['username'],
+                        recipientId: odocUserId,
+                        recipientName: odocUsername,
                       ),
                     ),
                   );
