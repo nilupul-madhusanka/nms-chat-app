@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class EmergencyContactPage extends StatelessWidget {
+  const EmergencyContactPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,7 +82,7 @@ class EmergencyContactPage extends StatelessWidget {
                 onTap: () {}),
             const Spacer(),
             const Center(
-              child: const Text(
+              child: Text(
                 "Available 24/7 to assist you in any emergency",
                 style: TextStyle(
                   fontSize: 16,

@@ -26,10 +26,10 @@ class RegisterScreen extends StatelessWidget {
         'email': emailController.text.trim(),
       });
 
-      // ignore: use_build_context_synchronously
+      if (!context.mounted) return;
       Navigator.pushReplacementNamed(context, '/login');
     } catch (error) {
-      print('Error registering user: $error');
+      debugPrint('Error registering user: $error');
     }
   }
 
@@ -79,6 +79,7 @@ class RegisterScreen extends StatelessWidget {
                       labelText: 'Email',
                       labelStyle: TextStyle(color: Colors.amber))),
               TextField(
+                  style: const TextStyle(color: Colors.white),
                   controller: passwordController,
                   decoration: const InputDecoration(
                       labelText: 'Password',

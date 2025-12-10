@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
+  HomeScreen({super.key});
+
   final User currentUser = FirebaseAuth.instance.currentUser!;
 
   @override
@@ -26,6 +28,7 @@ class HomeScreen extends StatelessWidget {
             ),
             onPressed: () async {
               await FirebaseAuth.instance.signOut();
+              if (!context.mounted) return;
               Navigator.pushReplacementNamed(context, '/login');
             },
           ),

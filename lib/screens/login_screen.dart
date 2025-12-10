@@ -13,10 +13,10 @@ class LoginScreen extends StatelessWidget {
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
-      // ignore: use_build_context_synchronously
+      if (!context.mounted) return;
       Navigator.pushReplacementNamed(context, '/home');
     } catch (error) {
-      print('Error logging in: $error');
+      debugPrint('Error logging in: $error');
     }
   }
 

@@ -8,7 +8,7 @@ import 'screens/register_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         '/register': (context) => RegisterScreen(),
         '/login': (context) => LoginScreen(),
         '/home': (context) => HomeScreen(),
-        '/contact': (context) => EmergencyContactPage(),
+        '/contact': (context) => const EmergencyContactPage(),
       },
     );
   }
